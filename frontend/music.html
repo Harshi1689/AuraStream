@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EmotionTune — Emotion Based Music Player</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Google Fonts for modern typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body class="music-page-body">
+
+    <div class="music-app-layout">
+
+        <!-- Left Sidebar (Matching Image 1) -->
+        <aside class="music-sidebar">
+
+            <!-- Brand Logo -->
+            <div class="sidebar-brand-box">
+                <div class="brand-icon-gradient">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/>
+                    </svg>
+                </div>
+                <span class="brand-text-name">EmotionTune</span>
+            </div>
+
+            <!-- Primary Navigation Links -->
+            <nav class="sidebar-main-nav">
+                <a href="index.html" class="sidebar-nav-item">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+                    </svg>
+                    <span>Home</span>
+                </a>
+
+                <a href="camera.html" class="sidebar-nav-item">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
+                    </svg>
+                    <span>Detect emotion</span>
+                </a>
+            </nav>
+
+            <!-- Mood Mixes Section (Matching Image 1) -->
+            <div class="sidebar-mixes-section">
+                <div class="sidebar-mixes-header">YOUR MOOD MIXES</div>
+
+                <div class="sidebar-mix-item active" id="mixItemHappy" onclick="switchMood('happy')">
+                    <div class="mix-color-icon happy"></div>
+                    <span class="mix-title">Happy Mix</span>
+                </div>
+
+                <div class="sidebar-mix-item" id="mixItemSad" onclick="switchMood('sad')">
+                    <div class="mix-color-icon sad"></div>
+                    <span class="mix-title">Sad Mix</span>
+                </div>
+
+                <div class="sidebar-mix-item" id="mixItemNeutral" onclick="switchMood('neutral')">
+                    <div class="mix-color-icon neutral"></div>
+                    <span class="mix-title">Neutral Mix</span>
+                </div>
+            </div>
+
+            <!-- Stepper Link / Footer Note in Sidebar -->
+            <div class="sidebar-footer-info">
+                <span>Emotion Based Music Player</span>
+            </div>
+
+        </aside>
+
+        <!-- Main Music Player Content Area -->
+        <main class="music-main-viewport" id="spotifyMain">
+
+            <!-- Mood Playlist Hero Header with Dynamic Gradient (Matching Image 1) -->
+            <section class="mood-playlist-banner" id="playlistHero">
+
+                <!-- Left: Big Artwork Square with Emoji -->
+                <div class="mood-artwork-square" id="playlistCoverArt">
+                    <span class="mood-emoji-display" id="heroCoverEmoji">😊</span>
+                </div>
+
+                <!-- Right: Playlist Metadata -->
+                <div class="mood-banner-info">
+                    <span class="mood-label-tag">MOOD PLAYLIST</span>
+                    <h1 class="mood-banner-title" id="playlistTitle">Happy Mix</h1>
+                    <p class="mood-banner-desc" id="playlistDesc">Music selected for your happy mood</p>
+                </div>
+
+            </section>
+
+            <!-- Action & Mood Pill Filter Bar (Matching Image 1) -->
+            <div class="player-action-row">
+
+                <!-- Big Purple Play/Pause Button -->
+                <button class="main-hero-play-btn" id="heroPlayBtn" title="Play or Pause Playlist">
+                    <svg id="heroPlayIcon" width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+                        <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                    </svg>
+                </button>
+
+                <!-- Mood Quick Filter Pills (Matching Image 1: Happy, Sad, Neutral) -->
+                <div class="mood-filter-pills-bar">
+                    <button class="mood-filter-pill active" id="pillHappy" onclick="switchMood('happy')">Happy</button>
+                    <button class="mood-filter-pill" id="pillSad" onclick="switchMood('sad')">Sad</button>
+                    <button class="mood-filter-pill" id="pillNeutral" onclick="switchMood('neutral')">Neutral</button>
+                </div>
+
+            </div>
+
+            <!-- Tracklist Table (Matching Image 1: #, TITLE, TIME) -->
+            <div class="music-tracklist-container">
+                <table class="music-tracklist-table">
+                    <thead>
+                        <tr>
+                            <th class="th-num">#</th>
+                            <th class="th-title">TITLE</th>
+                            <th class="th-time">TIME</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tracklistTbody">
+                        <!-- Injected dynamically by music.js -->
+                    </tbody>
+                </table>
+            </div>
+
+        </main>
+
+        <!-- Bottom Persistent Player Bar (Matching Image 1) -->
+        <footer class="music-bottom-bar">
+
+            <!-- Left: Currently Playing Track -->
+            <div class="bottom-track-left">
+                <div class="bottom-thumb-art" id="bottomCoverThumb">
+                    <span id="bottomThumbEmoji">😊</span>
+                </div>
+                <div class="bottom-track-meta">
+                    <span class="bottom-track-title" id="bottomTrackTitle">happy1.mp3</span>
+                    <span class="bottom-track-artist" id="bottomTrackArtist">EmotionTune</span>
+                </div>
+            </div>
+
+            <!-- Center: Playback Controls & Progress Scrubber & Stepper Nav -->
+            <div class="bottom-center-controls">
+
+                <!-- Playback Buttons (Prev, Play/Pause, Next) -->
+                <div class="bottom-ctrl-buttons">
+                    <button class="player-icon-btn" id="prevTrackBtn" title="Previous Track">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                            <polygon points="19 20 9 12 19 4 19 20"></polygon>
+                            <line x1="5" y1="19" x2="5" y2="5" stroke="currentColor" stroke-width="2" stroke-linecap="round"></line>
+                        </svg>
+                    </button>
+
+                    <button class="bottom-play-circle" id="mainPlayPauseBtn" title="Play / Pause">
+                        <svg id="mainPlayIcon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                            <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                        </svg>
+                    </button>
+
+                    <button class="player-icon-btn" id="nextTrackBtn" title="Next Track">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                            <polygon points="5 4 15 12 5 20 5 4"></polygon>
+                            <line x1="19" y1="5" x2="19" y2="19" stroke="currentColor" stroke-width="2" stroke-linecap="round"></line>
+                        </svg>
+                    </button>
+                </div>
+
+                <!-- Timeline Scrubber with Stepper Pill Center (Exact visual from Image 1!) -->
+                <div class="bottom-timeline-row">
+                    <span class="bottom-timestamp" id="currentTimeText">0:00</span>
+
+                    <div class="bottom-progress-track" id="progressBarSlider">
+                        <div class="bottom-progress-fill" id="progressFill" style="width: 0%;"></div>
+                        <div class="bottom-progress-thumb" id="progressThumb" style="left: 0%;"></div>
+                    </div>
+
+                    <!-- Centered Stepper Pill Bar embedded right in the center (Matching Image 1!) -->
+                    <div class="stepper-nav-pill bottom-pill">
+                        <a href="index.html" class="step-pill-item">1 &bull; Home</a>
+                        <a href="camera.html" class="step-pill-item">2 &bull; Camera</a>
+                        <span class="step-pill-item active">3 &bull; Music</span>
+                    </div>
+
+                    <span class="bottom-timestamp" id="totalDurationText">2:14</span>
+                </div>
+
+            </div>
+
+            <!-- Right: Volume Icon & Slider -->
+            <div class="bottom-volume-right">
+                <button class="volume-speaker-btn" id="volumeBtn" title="Mute/Unmute">
+                    <svg id="volumeIcon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                        <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+                    </svg>
+                </button>
+                <div class="volume-slider-bar" id="volumeSlider">
+                    <div class="volume-slider-fill" id="volumeFill" style="width: 75%;"></div>
+                    <div class="volume-slider-thumb" id="volumeThumb" style="left: 75%;"></div>
+                </div>
+            </div>
+
+        </footer>
+
+    </div>
+
+    <!-- Hidden HTML5 Audio Player -->
+    <audio id="audioPlayer" preload="auto"></audio>
+
+    <!-- Scripts -->
+    <script src="music.js"></script>
+</body>
+</html>

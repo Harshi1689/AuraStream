@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EmotionTune — Emotion Based Music Player</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Google Fonts for modern typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700;800&family=Orbitron:wght@700;800;900&display=swap" rel="stylesheet">
+</head>
+<body class="home-page-body">
+
+    <!-- Ambient Glowing Color Orbs (Violet & Magenta) -->
+    <div class="ambient-glow-orbs" aria-hidden="true">
+        <div class="glow-orb orb-purple-left"></div>
+        <div class="glow-orb orb-pink-right"></div>
+        <div class="glow-orb orb-center-soft"></div>
+    </div>
+
+    <!-- Floating Background Musical Notes -->
+    <div class="floating-notes-container" aria-hidden="true">
+        <span class="float-note note-1">♪</span>
+        <span class="float-note note-2">♫</span>
+        <span class="float-note note-3">♬</span>
+        <span class="float-note note-4">♪</span>
+        <span class="float-note note-5">♫</span>
+        <span class="float-note note-6">♩</span>
+    </div>
+
+    <!-- VISIBLE BACKGROUND WATERMARK: EMOTION BASED MUSIC PLAYER -->
+    <div class="home-bg-watermark" aria-hidden="true">
+        <div class="watermark-main">EMOTION BASED MUSIC PLAYER</div>
+        <div class="watermark-sub">REAL-TIME FACIAL MOOD RECOGNITION &bull; AI SOUNDTRACK ENGINE</div>
+    </div>
+
+    <!-- Main Container -->
+    <div class="home-page-container">
+
+        <!-- Top Navigation Header -->
+        <header class="home-nav-header">
+            <div class="nav-brand-group">
+                <a href="index.html" class="nav-brand">
+                    <div class="brand-logo-badge">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/>
+                        </svg>
+                    </div>
+                    <div class="brand-text-col">
+                        <span class="brand-name-text">EmotionTune</span>
+                        <span class="brand-sub-badge">AI Music Player</span>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Header Menu Navigation -->
+            <nav class="home-nav-menu">
+                <a href="index.html" class="nav-menu-link active">Home</a>
+                <a href="camera.html" class="nav-menu-link">Camera Detector</a>
+                <a href="music.html?emotion=happy" class="nav-menu-link">Music Player</a>
+                <a href="#how-it-works" class="nav-menu-link">How It Works</a>
+            </nav>
+
+            <!-- Header Action Button -->
+            <div class="nav-cta-group">
+                <a href="camera.html" class="btn-nav-scanner" id="navStartBtn">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
+                        <circle cx="12" cy="13" r="4"/>
+                    </svg>
+                    <span>Launch Scanner</span>
+                </a>
+            </div>
+        </header>
+
+        <!-- Center Hero Section (Matching Image 3) -->
+        <main class="home-hero-center">
+
+            <!-- 3D Spinning Vinyl Record -->
+            <div class="vinyl-record-wrapper">
+                <div class="vinyl-record-disc" id="vinylRecord">
+                    <!-- Concentric vinyl grooves rendered in CSS -->
+                    <div class="vinyl-groove-ring ring-1"></div>
+                    <div class="vinyl-groove-ring ring-2"></div>
+                    <div class="vinyl-groove-ring ring-3"></div>
+                    <div class="vinyl-sheen-highlight"></div>
+                    <!-- Center Magenta Label with White Music Note -->
+                    <div class="vinyl-center-label">
+                        <div class="vinyl-spindle-hole"></div>
+                        <span class="vinyl-center-note">♪</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Glowing Soundwave Equalizer (Pink-Magenta-Purple Gradient) -->
+            <div class="hero-soundwave-bars" id="soundwaveContainer">
+                <span class="wave-bar bar-1"></span>
+                <span class="wave-bar bar-2"></span>
+                <span class="wave-bar bar-3"></span>
+                <span class="wave-bar bar-4"></span>
+                <span class="wave-bar bar-5"></span>
+                <span class="wave-bar bar-6"></span>
+                <span class="wave-bar bar-7"></span>
+                <span class="wave-bar bar-8"></span>
+                <span class="wave-bar bar-9"></span>
+                <span class="wave-bar bar-10"></span>
+                <span class="wave-bar bar-11"></span>
+                <span class="wave-bar bar-12"></span>
+                <span class="wave-bar bar-13"></span>
+                <span class="wave-bar bar-14"></span>
+                <span class="wave-bar bar-15"></span>
+                <span class="wave-bar bar-16"></span>
+                <span class="wave-bar bar-17"></span>
+                <span class="wave-bar bar-18"></span>
+                <span class="wave-bar bar-19"></span>
+                <span class="wave-bar bar-20"></span>
+                <span class="wave-bar bar-21"></span>
+            </div>
+
+            <!-- Giant Bold Headline (Matching Image 3) -->
+            <h1 class="hero-headline-text">
+                Music that <span class="gradient-accent-text">feels</span><br>
+                how you feel
+            </h1>
+
+            <!-- Subtitle -->
+            <p class="hero-subtext">
+                Show us your face. We'll read your emotion and play the perfect soundtrack.
+            </p>
+
+            <!-- CTA "Get Started →" Button (Pink/Magenta Gradient Glow) -->
+            <div class="hero-action-container">
+                <button id="startButton" class="btn-get-started" title="Start Camera Detector">
+                    <span>Get Started &rarr;</span>
+                </button>
+            </div>
+
+            <!-- (NOTE: Stepper pill 1·Home, 2·Camera, 3·Music has been removed as requested) -->
+
+        </main>
+
+        <!-- 3-Step Interactive Walkthrough Section -->
+        <section class="home-features-section" id="how-it-works">
+            <div class="feature-card">
+                <div class="feature-icon happy">☀️</div>
+                <h3>01 &bull; Capture Face</h3>
+                <p>Open the camera scanner. Real-time computer vision privately detects your facial micro-expressions.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon neutral">⚡</div>
+                <h3>02 &bull; Predict Emotion</h3>
+                <p>Machine learning instantly classifies your current mood (Happy, Sad, Neutral, Angry, Surprise).</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon sad">🎵</div>
+                <h3>03 &bull; Stream Soundtrack</h3>
+                <p>Automatically launches a custom Spotify-styled playlist attuned to your exact emotional frequency.</p>
+            </div>
+        </section>
+
+        <!-- Full Responsive Footer -->
+        <footer class="home-main-footer">
+            <div class="footer-top-row">
+                <div class="footer-brand-col">
+                    <div class="footer-brand-logo">
+                        <div class="brand-logo-badge small">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/>
+                            </svg>
+                        </div>
+                        <span class="footer-brand-name">EmotionTune</span>
+                    </div>
+                    <p class="footer-tagline">
+                        Emotion Based Music Player &mdash; Real-time facial expression recognition paired with dynamic mood soundscapes.
+                    </p>
+                </div>
+
+                <div class="footer-links-col">
+                    <h4>Navigation</h4>
+                    <a href="index.html">Home</a>
+                    <a href="camera.html">Camera Detector</a>
+                    <a href="music.html?emotion=happy">Music Player</a>
+                </div>
+
+                <div class="footer-links-col">
+                    <h4>Mood Mixes</h4>
+                    <a href="music.html?emotion=happy">Happy Mix</a>
+                    <a href="music.html?emotion=sad">Sad Mix</a>
+                    <a href="music.html?emotion=neutral">Neutral Mix</a>
+                </div>
+
+                <div class="footer-links-col">
+                    <h4>Privacy & Security</h4>
+                    <span class="footer-info-item">&bull; 100% Local Video Stream</span>
+                    <span class="footer-info-item">&bull; Zero Server Image Storage</span>
+                    <span class="footer-info-item">&bull; Real-time Session Processing</span>
+                </div>
+            </div>
+
+            <div class="footer-bottom-row">
+                <div class="footer-copy">
+                    &copy; 2026 EmotionTune &bull; Emotion Based Music Player. All rights reserved.
+                </div>
+                <div class="footer-privacy-note">
+                    <span class="footer-dot-live"></span>
+                    <span>System Active &bull; Privacy Protected</span>
+                </div>
+            </div>
+        </footer>
+
+    </div>
+
+    <!-- Scripts -->
+    <script src="script.js"></script>
+</body>
+</html>

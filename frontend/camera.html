@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OG Detector — Emotion Detection</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Google Fonts for modern typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="detector-page-body">
+
+    <div class="detector-app-container">
+
+        <!-- Top Header Bar (Matching Image 2: "OG Detector", "FPS: 31") -->
+        <header class="detector-topbar">
+            <div class="detector-topbar-left">
+                <a href="index.html" class="detector-back-link" title="Return to Home">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="19" y1="12" x2="5" y2="12"></line>
+                        <polyline points="12 19 5 12 12 5"></polyline>
+                    </svg>
+                    <span>Back</span>
+                </a>
+                <div class="detector-brand-badge">
+                    <span class="live-dot-pulse"></span>
+                    <span class="detector-brand-title">EmotionTune</span>
+                </div>
+            </div>
+
+            <div class="detector-header-center">
+                <h1 class="detector-title-text">OG Detector</h1>
+            </div>
+
+            <div class="detector-topbar-right">
+                <div class="fps-counter-badge">
+                    <span id="fpsValue">FPS: 31</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Detector Layout Grid (Two Columns) -->
+        <main class="detector-main-grid">
+
+            <!-- Left Column: Camera Viewport + Emotion Probabilities Bar Chart -->
+            <div class="detector-left-column">
+
+                <!-- Camera Viewport Box -->
+                <div class="camera-viewport-box" id="viewfinderCard">
+
+                    <!-- Live Video Element -->
+                    <video id="video" class="detector-video" autoplay playsinline muted></video>
+
+                    <!-- Frozen Captured Image Overlay -->
+                    <img id="capturedPreview" class="detector-frozen-preview" alt="Captured Frame">
+
+                    <!-- Face Detection Bounding Box (Exact visual from Image 2) -->
+                    <div class="face-bounding-box" id="faceBoundingBox">
+                        <!-- Top Tag with Emoji + Emotion + % -->
+                        <div class="bounding-box-badge top" id="bboxTopTag">
+                            <span class="bbox-emoji" id="bboxEmoji">😐</span>
+                            <span class="bbox-name" id="bboxName">Neutral</span>
+                            <span class="bbox-pct" id="bboxPercent">91%</span>
+                        </div>
+                        <!-- Bottom Tag: Confidence: 91% -->
+                        <div class="bounding-box-badge bottom" id="bboxBottomTag">
+                            <span>Confidence: <strong id="bboxConfidence">91%</strong></span>
+                        </div>
+                    </div>
+
+                    <!-- Flash Animation Layer -->
+                    <div class="detector-shutter-flash" id="shutterFlash"></div>
+
+                    <!-- Viewport Floating Action Bar -->
+                    <div class="viewport-quick-tools">
+                        <button id="toggleMirrorBtn" class="viewport-tool-btn active" title="Toggle Mirror View">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="17 1 21 5 17 9"></polyline>
+                                <path d="M3 11V9a4 4 0 0 1 4-4h14"></path>
+                                <polyline points="7 23 3 19 7 15"></polyline>
+                                <path d="M21 13v2a4 4 0 0 1-4 4H3"></path>
+                            </svg>
+                            <span>Mirror</span>
+                        </button>
+
+                        <button id="captureButton" class="viewport-capture-btn" title="Capture and Detect Emotion">
+                            <span class="capture-inner-circle"></span>
+                            <span>Capture & Detect</span>
+                        </button>
+
+                        <button id="retakeButton" class="viewport-tool-btn" title="Reset Camera">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="1 4 1 10 7 10"></polyline>
+                                <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path>
+                            </svg>
+                            <span>Reset</span>
+                        </button>
+                    </div>
+
+                </div>
+
+                <!-- Status Feedback Message -->
+                <div class="detector-status-line" id="status">
+                    <span class="status-indicator-dot"></span>
+                    <span>Camera ready. Position your face in good lighting and click Capture.</span>
+                </div>
+
+                <!-- Emotion Probabilities Panel (Exact visual from Image 2) -->
+                <div class="emotion-probabilities-panel">
+                    <div class="prob-header-row">
+                        <h2 class="prob-panel-title">Emotion Probabilities</h2>
+                        <span class="prob-panel-note">Real-Time Distribution</span>
+                    </div>
+
+                    <div class="prob-bars-list">
+                        <!-- Neutral -->
+                        <div class="prob-bar-row">
+                            <span class="prob-label">Neutral</span>
+                            <div class="prob-track">
+                                <div class="prob-fill fill-neutral" id="probFillNeutral" style="width: 91%;"></div>
+                            </div>
+                            <span class="prob-val" id="probValNeutral">91%</span>
+                        </div>
+
+                        <!-- Sad -->
+                        <div class="prob-bar-row">
+                            <span class="prob-label">Sad</span>
+                            <div class="prob-track">
+                                <div class="prob-fill fill-sad" id="probFillSad" style="width: 4%;"></div>
+                            </div>
+                            <span class="prob-val" id="probValSad">4%</span>
+                        </div>
+
+                        <!-- Happy -->
+                        <div class="prob-bar-row">
+                            <span class="prob-label">Happy</span>
+                            <div class="prob-track">
+                                <div class="prob-fill fill-happy" id="probFillHappy" style="width: 3%;"></div>
+                            </div>
+                            <span class="prob-val" id="probValHappy">3%</span>
+                        </div>
+
+                        <!-- Angry -->
+                        <div class="prob-bar-row">
+                            <span class="prob-label">Angry</span>
+                            <div class="prob-track">
+                                <div class="prob-fill fill-angry" id="probFillAngry" style="width: 1%;"></div>
+                            </div>
+                            <span class="prob-val" id="probValAngry">1%</span>
+                        </div>
+
+                        <!-- Surprise -->
+                        <div class="prob-bar-row">
+                            <span class="prob-label">Surprise</span>
+                            <div class="prob-track">
+                                <div class="prob-fill fill-surprise" id="probFillSurprise" style="width: 1%;"></div>
+                            </div>
+                            <span class="prob-val" id="probValSurprise">&lt;1%</span>
+                        </div>
+
+                        <!-- Fear -->
+                        <div class="prob-bar-row">
+                            <span class="prob-label">Fear</span>
+                            <div class="prob-track">
+                                <div class="prob-fill fill-fear" id="probFillFear" style="width: 1%;"></div>
+                            </div>
+                            <span class="prob-val" id="probValFear">&lt;1%</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Right Column: Recent Detections History Panel (Exact visual from Image 2) -->
+            <div class="detector-right-column">
+
+                <div class="recent-detections-card">
+                    <div class="recent-header-row">
+                        <h2 class="recent-title">Recent Detections</h2>
+                        <span class="recent-count" id="detectionCount">7 entries</span>
+                    </div>
+
+                    <!-- Scrollable History List -->
+                    <div class="recent-detections-list" id="recentDetectionsList">
+                        <!-- Items matching Image 2 -->
+                        <div class="recent-item">
+                            <div class="recent-emoji-circle neutral">😐</div>
+                            <div class="recent-info">
+                                <div class="recent-name">Neutral</div>
+                                <div class="recent-conf">Confidence: 91%</div>
+                            </div>
+                            <div class="recent-time">10:06 PM</div>
+                        </div>
+
+                        <div class="recent-item">
+                            <div class="recent-emoji-circle sad">😢</div>
+                            <div class="recent-info">
+                                <div class="recent-name">Sad</div>
+                                <div class="recent-conf">Confidence: 88%</div>
+                            </div>
+                            <div class="recent-time">10:04 PM</div>
+                        </div>
+
+                        <div class="recent-item">
+                            <div class="recent-emoji-circle neutral">😐</div>
+                            <div class="recent-info">
+                                <div class="recent-name">Neutral</div>
+                                <div class="recent-conf">Confidence: 93%</div>
+                            </div>
+                            <div class="recent-time">10:03 PM</div>
+                        </div>
+
+                        <div class="recent-item">
+                            <div class="recent-emoji-circle angry">😡</div>
+                            <div class="recent-info">
+                                <div class="recent-name">Angry</div>
+                                <div class="recent-conf">Confidence: 87%</div>
+                            </div>
+                            <div class="recent-time">10:02 PM</div>
+                        </div>
+
+                        <div class="recent-item">
+                            <div class="recent-emoji-circle neutral">😐</div>
+                            <div class="recent-info">
+                                <div class="recent-name">Neutral</div>
+                                <div class="recent-conf">Confidence: 87%</div>
+                            </div>
+                            <div class="recent-time">10:02 PM</div>
+                        </div>
+
+                        <div class="recent-item">
+                            <div class="recent-emoji-circle neutral">😐</div>
+                            <div class="recent-info">
+                                <div class="recent-name">Neutral</div>
+                                <div class="recent-conf">Confidence: 87%</div>
+                            </div>
+                            <div class="recent-time">10:02 PM</div>
+                        </div>
+
+                        <div class="recent-item">
+                            <div class="recent-emoji-circle neutral">😐</div>
+                            <div class="recent-info">
+                                <div class="recent-name">Neutral</div>
+                                <div class="recent-conf">Confidence: 92%</div>
+                            </div>
+                            <div class="recent-time">10:02 PM</div>
+                        </div>
+                    </div>
+
+                    <!-- Direct Navigation to Music Player -->
+                    <div class="recent-action-footer">
+                        <button id="proceedToMusicBtn" class="btn-open-music">
+                            <span>Proceed to Music Player</span>
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                                <polygon points="5 3 19 12 5 21 5 3"/>
+                            </svg>
+                        </button>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </main>
+
+        <!-- Stepper Navigation Pill Bar at Bottom (Active: 2 · Camera) -->
+        <footer class="detector-bottom-stepper">
+            <div class="stepper-nav-pill">
+                <a href="index.html" class="step-pill-item">1 &bull; Home</a>
+                <span class="step-pill-item active">2 &bull; Camera</span>
+                <a href="music.html?emotion=happy" class="step-pill-item" id="bottomMusicStepLink">3 &bull; Music</a>
+            </div>
+        </footer>
+
+        <!-- Hidden canvas for image capture processing -->
+        <canvas id="canvas" class="snapshot-canvas" style="display: none;"></canvas>
+
+    </div>
+
+    <!-- Scripts -->
+    <script src="script.js"></script>
+</body>
+</html>
