@@ -11,7 +11,10 @@ app = Flask(__name__)
 CORS(app)
 
 
-MODEL_PATH = "backend/models/emotion_model.pkl"
+import os
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+MODEL_PATH = os.path.join(BASE_DIR, "models", "emotion_model.pkl")
 
 model = joblib.load(MODEL_PATH)
 
