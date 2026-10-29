@@ -7,13 +7,18 @@ import numpy as np
 import joblib
 
 
-app = Flask(__name__)
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+PROJECT_DIR = os.path.dirname(BASE_DIR)
+FRONTEND_DIR = os.path.join(PROJECT_DIR, "frontend")
+
+app = Flask(
+    __name__,
+    static_folder=FRONTEND_DIR,
+    static_url_path=""
+)
+
 CORS(app)
 
-
-import os
-
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 MODEL_PATH = os.path.join(BASE_DIR, "models", "emotion_model.pkl")
 
 model = joblib.load(MODEL_PATH)
@@ -35,11 +40,9 @@ face_cascade = cv2.CascadeClassifier(
     "haarcascade_frontalface_default.xml"
 )
 
-
 @app.route("/")
 def home():
-    return "Emotion Music Player Backend is running"
-
+    return send_from_directory(FRONTEND_DIR, "index.html")
 
 @app.route("/predict", methods=["POST"])
 def predict():
